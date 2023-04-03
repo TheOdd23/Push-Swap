@@ -24,11 +24,11 @@ typedef struct t_l
 
 typedef struct t_lim
 {
-	int		l2;
-	int		l;
-	int		m;
-	int		s;
-	int		i;
+	int		l2; //limit 2
+	int		l; //limit 1
+	int		m; //median
+	int		s; //size
+	int		i; //index
 }	t_lim;
 
 void		swap(t_l **a, char c);
