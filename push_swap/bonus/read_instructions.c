@@ -12,7 +12,7 @@
 
 #include "push_swap_bonus.h"
 
-void	print_stack_or_error(int res, t_l *a, t_l *b, char *instructions)
+void	print_stack_or_error(int res, t_stack *a, t_stack *b, char *instructions)
 {
 	if (res == 0)
 	{
@@ -28,9 +28,9 @@ void	print_stack_or_error(int res, t_l *a, t_l *b, char *instructions)
 		print_stacks(a, b);
 }
 
-void	check_a(t_l **a, t_l *head)
+void	check_a(t_stack **a, t_stack *head)
 {
-	if ((*a)->in > (*a)->next->in)
+	if ((*a)->index > (*a)->next->index)
 	{
 		*a = head;
 		del_lists(*a);
@@ -50,9 +50,9 @@ void	check_a(t_l **a, t_l *head)
 	}
 }
 
-void	is_in_order(t_l *a, t_l *b)
+void	is_in_order(t_stack *a, t_stack *b)
 {
-	t_l	*head;
+	t_stack	*head;
 
 	head = a;
 	if (b != NULL)
@@ -69,7 +69,7 @@ void	is_in_order(t_l *a, t_l *b)
 	}
 }
 
-int	dispatch_instructions(t_l **a, t_l **b, char *instructions)
+int	dispatch_instructions(t_stack **a, t_stack **b, char *instructions)
 {
 	if (ft_strncmp(instructions, "sa\n", 3) == 0)
 		swap(a, 'a');
@@ -98,7 +98,7 @@ int	dispatch_instructions(t_l **a, t_l **b, char *instructions)
 	return (1);
 }
 
-void	read_instructions(t_l *a, t_l *b)
+void	read_instructions(t_stack *a, t_stack *b)
 {
 	char	*instructions;
 	int		res;
@@ -106,7 +106,7 @@ void	read_instructions(t_l *a, t_l *b)
 	print_stacks(a, b);
 	while (1)
 	{
-		instructions = get_next_line(0);
+		instructions = get_next_stackine(0);
 		if (instructions == NULL)
 		{
 			free (instructions);

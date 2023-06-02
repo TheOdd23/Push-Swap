@@ -127,7 +127,7 @@ void	check_errors(int *ac, char ***av, int *len)
 	i = 0;
 	if (*ac == 2)
 	{
-		*len = ft_nb_args((*av)[1], ' ');
+		*len = nb_args((*av)[1], ' ');
 		splitted = ft_split((*av)[1], ' ');
 		*ac = *len;
 		if (check_int(*ac, splitted, len) == 0

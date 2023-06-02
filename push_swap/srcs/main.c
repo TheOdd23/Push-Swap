@@ -29,28 +29,28 @@ int	in_order(int ac, char **av, int *len)
 	return (0);
 }
 
-int	ft_intlistsize(t_l *lst)
+int	stack_size(t_stack *stack)
 {
 	int	i;
 
 	i = 1;
-	if (lst == NULL)
+	if (stack == NULL)
 		return (0);
-	lst = lst->next;
-	while (lst != NULL)
+	stack = stack->next;
+	while (stack != NULL)
 	{
-		lst = lst->next;
+		stack = stack->next;
 		i++;
 	}
 	return (i);
 }
 
-void	create_stack_a(t_l **a, int nb)
+void	create_stack_a(t_stack **a, int nb)
 {
-	t_l	*temp;
-	t_l	*temp2;
+	t_stack	*temp;
+	t_stack	*temp2;
 
-	temp = malloc(sizeof(t_l));
+	temp = malloc(sizeof(t_stack));
 	temp->content = nb;
 	temp->next = NULL;
 	if ((*a) == NULL)
@@ -64,7 +64,7 @@ void	create_stack_a(t_l **a, int nb)
 	}
 }
 
-void	parse_args(t_l **a, char **av, int ac)
+void	parse_args(t_stack **a, char **av, int ac)
 {
 	int		i;
 	int		len;
@@ -90,8 +90,8 @@ void	parse_args(t_l **a, char **av, int ac)
 
 int	main(int ac, char **av)
 {
-	t_l		*a;
-	t_l		*b;
+	t_stack	*a;
+	t_stack	*b;
 	int		size;
 
 	a = NULL;
@@ -100,13 +100,13 @@ int	main(int ac, char **av)
 		return (0);
 	if (ac >= 2)
 		parse_args(&a, av, ac);
-	size = ft_intlistsize(a);
+	size = stack_size(a);
 	if (size == 1)
 		return (0);
 	indexation(&a);
 	if (size >= 2 && size <= 5)
 	{
-		ultra_simple_swap(a, b, size);
+		simple_swaps(a, b, size);
 		return (0);
 	}
 	push_swap(a, b, size);

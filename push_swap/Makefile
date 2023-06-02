@@ -3,10 +3,10 @@ BONNAME			=	checker
 HEAD			=	includes/push_swap.h
 CC				=	gcc
 CFLAGS			=	-Wall -Werror -Wextra
-SRCS			=	srcs/main.c srcs/ft_nb_args.c srcs/do_op_a_vers_b.c srcs/do_op_b_vers_a.c srcs/operations_ab.c \
-					srcs/push_swap.c srcs/check_errors.c srcs/indexation.c srcs/simple_swap.c srcs/del_lists.c srcs/operations.c
-BONSRCS			=	bonus/main_bonus.c bonus/read_instructions.c srcs/ft_nb_args.c srcs/operations_ab.c \
-					bonus/print_stack.c bonus/check_errors_bonus.c srcs/indexation.c srcs/del_lists.c srcs/operations.c
+SRCS			=	srcs/main.c srcs/nb_args.c srcs/do_op_a_to_b.c srcs/do_op_b_to_a.c srcs/operations_ab.c \
+					srcs/push_swap.c srcs/check_errors.c srcs/indexation.c srcs/simple_swap.c srcs/del_stacks.c srcs/operations.c
+BONSRCS			=	bonus/main_bonus.c bonus/read_instructions.c srcs/nb_args.c srcs/operations_ab.c \
+					bonus/print_stack.c bonus/check_errors_bonus.c srcs/indexation.c srcs/del_stacks.c srcs/operations.c
 LIB_SRCS 		=	libft/ft_atoi.c libft/ft_isdigit.c libft/ft_split.c libft/ft_calloc.c libft/ft_bzero.c 
 LIB_SRCS_BON	=	libft/get_next_line.c libft/get_next_line_utils.c libft/ft_strchr.c libft/ft_strlen.c libft/ft_strncmp.c \
 					libft/ft_printf.c libft/ft_check_var.c libft/ft_itoa.c libft/ft_printhex.c libft/ft_printnbr.c \

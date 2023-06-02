@@ -43,8 +43,8 @@ long long	ft_atoll(const char *str)
 
 void	check_doublons(int ac, char **av, int *len)
 {
-	int	res;
-	int	res2;
+	int	nb;
+	int	nb2;
 	int	i;
 	int	ii;
 
@@ -53,12 +53,12 @@ void	check_doublons(int ac, char **av, int *len)
 		i = 1;
 	while (i < ac)
 	{
-		res = ft_atoi(av[i]);
+		nb = ft_atoi(av[i]);
 		ii = i + 1;
 		while (av[ii])
 		{
-			res2 = ft_atoi(av[ii]);
-			if (res2 == res)
+			nb2 = ft_atoi(av[ii]);
+			if (nb2 == nb)
 			{
 				write(2, "Error\n", 6);
 				exit (0);
@@ -72,24 +72,24 @@ void	check_doublons(int ac, char **av, int *len)
 void	check_digit(int ac, char **av, int *len)
 {
 	int	i;
-	int	j;
+	int	ii;
 
 	i = 0;
 	if (*len == -1)
 		i = 1;
 	while (i < ac)
 	{
-		j = 0;
-		if (av[i][j] == '-' && ft_isdigit(av[i][1]) == 1)
+		ii = 0;
+		if (av[i][ii] == '-' && ft_isdigit(av[i][1]) == 1)
 			j++;
-		while (av[i][j])
+		while (av[i][ii])
 		{
-			if ((av[i][j] < '0' || av[i][j] > '9') && av[i][j])
+			if ((av[i][ii] < '0' || av[i][ii] > '9') && av[i][ii])
 			{
 				write(2, "Error\n", 6);
 				exit (0);
 			}
-			j++;
+			ii++;
 		}
 		i++;
 	}
@@ -97,7 +97,7 @@ void	check_digit(int ac, char **av, int *len)
 
 void	check_int(int ac, char **av, int *len)
 {
-	long	res;
+	long	nb;
 	int		i;
 
 	i = 0;
@@ -105,8 +105,8 @@ void	check_int(int ac, char **av, int *len)
 		i = 1;
 	while (i < ac)
 	{
-		res = ft_atoll(av[i]);
-		if (res < -2147483648 || res > 2147483647)
+		nb = ft_atoll(av[i]);
+		if (nb < INT_MIN || nb > INT_MAX)
 		{
 			write(2, "Error\n", 6);
 			exit (0);

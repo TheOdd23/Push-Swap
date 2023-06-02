@@ -16,43 +16,46 @@
 # include "../libft/libft.h"
 # include <limits.h>
 
-typedef struct t_intlist
+typedef struct t_stack
 {
-	int			content;
-	int			index;
-	struct t_intlist	*next;
-}	t_intlist;
+	int					content;
+	int					index;
+	struct t_stack	*next;
+}	t_stack;
 
 typedef struct t_limits
 {
-	int		first_limit; //limit 2
-	int		second_limit; //limit 1
-	int		median; //median
-	int		size; //size
-	int		index; //index
+	int		first_limit;
+	int		second_limit;
+	int		median;
+	int		size;
+	int		index;
 }	t_limits;
 
-void		swap(t_l **a, char c);
-void		push(t_l **s1, t_l **s2, char c);
-void		rotate(t_l **a, char c);
-void		reverse_rotate(t_l **a, char c);
-void		swap_ab(t_l **a, t_l **b, char c);
-void		reverse_rotate_ab(t_l **a, t_l **b, char c);
-void		rotate_ab(t_l **a, t_l **b, char c);
+void		swap(t_stack **a, char operation);
+void		push(t_stack **stack1, t_stack **stack2, char operation);
+void		rotate(t_stack **a, char operation);
+void		reverse_rotate(t_stack **a, char operation);
+void		swap_ab(t_stack **a, t_stack **b, char operation);
+void		reverse_rotate_ab(t_stack **a, t_stack **b, char operation);
+void		rotate_ab(t_stack **a, t_stack **b, char operation);
 long long	ft_atoll(const char *str);
-int		in_order(int ac, char **av, int *len);
+int			in_order(int ac, char **av, int *len);
 void		check_errors(int *ac, char ***av, int *len);
-void		indexation(t_l **a);
-void		push_swap(t_l *a, t_l *b, int size);
-int		nb_args(char const *str, char c);
-void		ultra_simple_swap(t_l *a, t_l *b, int size);
-void		do_op_1_a(t_l **a, t_l **b, t_lim l, int var);
-void		do_op_2_a(t_l **a, t_l **b, t_lim l, int var);
-void		do_op_1_b(t_l **a, t_l **b, t_l **head, t_lim *l);
-void		do_op_2_b(t_l **a, t_l **b, t_l **head, t_lim *l);
-void		do_op_3_b(t_l **a, t_l **b, t_l **head, t_lim *l);
+void		indexation(t_stack **a);
+void		push_swap(t_stack *a, t_stack *b, int size);
+int			nb_args(char const *str, char c);
+void		simple_swaps(t_stack *a, t_stack *b, int size);
+void		do_op_nb_in_first_half_a(t_stack **a, t_stack **b, t_limits lim, int nb_index);
+void		do_op_nb_in_second_half_a(t_stack **a, t_stack **b, t_limits lim, int nb_index);
+void		do_op_set_tops(t_stack **a, t_stack **b, t_limits lim);
+void		do_op_4_a(t_stack **a, t_stack **b, t_limits lim);
+void		do_op_1_b(t_stack **a, t_stack **b, t_stack **head, t_limits *lim);
+void		do_op_2_b(t_stack **a, t_stack **b, t_stack **head, t_limits *lim);
+void		do_op_3_b(t_stack **a, t_stack **b, t_stack **head, t_limits *lim);
+void		do_op_4_b(t_stack **a, t_stack **b, t_stack **head, t_limits *lim);
 void		del_tab(char **splitted, int ac);
-void		del_lists(t_intlist *list);
-int		intlist_size(t_intlist *lst);
+void		del_stacks(t_stack *stack);
+int			stack_size(t_stack *stack);
 
 #endif

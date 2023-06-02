@@ -12,23 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-void	really_simple_swap(t_l **a, t_l **b)
-{
-	if ((*b)->in > (*b)->next->in)
-	{
-		push(b, a, 'a');
-		rotate(a, 'a');
-		push(b, a, 'a');
-	}
-	else
-	{
-		push(b, a, 'a');
-		push(b, a, 'a');
-		rotate(a, 'a');
-	}
-}
-
-void	simple_swap(t_l **a)
+void	size3_swap(t_stack **a)
 {
 	if ((*a)->content > (*a)->next->content)
 	{
@@ -57,7 +41,7 @@ void	simple_swap(t_l **a)
 	}
 }
 
-void	still_simple_swap(t_l **a, t_l **b)
+void	size4_swap(t_stack **a, t_stack **b)
 {
 	while (*a != NULL)
 	{
@@ -75,7 +59,23 @@ void	still_simple_swap(t_l **a, t_l **b)
 	}
 }
 
-void	relatively_simple_swap(t_l **a, t_l **b)
+void	size5_endswap(t_stack **a, t_stack **b)
+{
+	if ((*b)->in > (*b)->next->in)
+	{
+		push(b, a, 'a');
+		rotate(a, 'a');
+		push(b, a, 'a');
+	}
+	else
+	{
+		push(b, a, 'a');
+		push(b, a, 'a');
+		rotate(a, 'a');
+	}
+}
+
+void	size5_swap(t_stack **a, t_stack **b)
 {
 	int	i;
 
@@ -97,17 +97,17 @@ void	relatively_simple_swap(t_l **a, t_l **b)
 		else
 			rotate(a, 'a');
 	}
-	really_simple_swap(a, b);
+	size5_endswap(a, b);
 }
 
-void	ultra_simple_swap(t_l *a, t_l *b, int size)
+void	simple_swaps(t_stack *a, t_stack *b, int size)
 {
 	if (size == 3)
-		simple_swap(&a);
+		size3_swap(&a);
 	else if (size == 4)
-		still_simple_swap(&a, &b);
+		size4_swap(&a, &b);
 	else if (size == 5)
-		relatively_simple_swap(&a, &b);
+		size5_swap(&a, &b);
 	else if (size == 2 && a->content > a->next->content)
 		rotate(&a, 'a');
 	del_lists(a);

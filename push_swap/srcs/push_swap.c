@@ -12,96 +12,96 @@
 
 #include "../includes/push_swap.h"
 
-void	final_sort(t_l **a, t_l **b, t_lim l)
+void	final_sort(t_stack **a, t_stack **b, t_limits lim)
 {
-	t_l	*head;
+	t_stack	*head;
 
 	head = *b;
-	while (l.i <= l.s)
+	while (lim.index <= lim.size)
 	{
-		if (((*b)->in == l.s || (*b)->in == l.s - 1) && l.i <= l.s / 2)
+		if (((*b)->index == lim.size || (*b)->index == lim.size - 1) && lim.index <= lim.size / 2)
 		{
-			if ((*b)->in == l.s)
-				do_op_1_b(a, b, &head, &l);
-			else if ((*b)->in == l.s - 1)
-				do_op_2_b(a, b, &head, &l);
+			if ((*b)->index == lim.size)
+				do_op_1_b(a, b, &head, &lim);
+			else if ((*b)->index == lim.size - 1)
+				do_op_2_b(a, b, &head, &lim);
 		}
-		else if (((*b)->in == l.s || (*b)->in == l.s -1) && l.i > l.s / 2)
-			do_op_3_b(a, b, &head, &l);
+		else if (((*b)->index == lim.size || (*b)->index == lim.size -1) && lim.index > lim.size / 2)
+			do_op_3_b(a, b, &head, &lim);
 		else
 		{
 			*b = (*b)->next;
-			l.i++;
+			lim.index++;
 		}
 	}
 }
 
-void	presort2(t_l **a, t_l **b, int var, t_lim *l)
+void	presort2(t_stack **a, t_stack **b, int nb_index, t_limits *lim)
 {
-	if ((var < (*l).m && (*l).i <= (*l).s / 2)
-		|| (var >= (*l).m && (*l).i <= (*l).s / 2))
-		do_op_1_a(a, b, *l, var);
-	else if ((var < (*l).m && (*l).i > (*l).s / 2)
-		|| (var >= (*l).m && (*l).i > (*l).s / 2))
-		do_op_2_a(a, b, *l, var);
-	(*l).s--;
-	(*l).i = 0;
+	if ((nb_index < (*lim).median && (*lim).index <= (*lim).size / 2)
+		|| (nb_index >= (*lim).median && (*lim).index <= (*lim).size / 2))
+		do_op_nb_in_first_half_a(a, b, *lim, nb_index);
+	else if ((nb_index < (*lim).median && (*lim).index > (*lim).size / 2)
+		|| (nb_index >= (*lim).median && (*lim).index > (*lim).size / 2))
+		do_op_nb_in_second_half_a(a, b, *lim, nb_index);
+	(*lim).size--;
+	(*lim).index = 0;
 }
 
-void	presort(t_l **a, t_l **b, t_lim *l)
+void	presort(t_stack **a, t_stack **b, t_limits *lim)
 {
-	int	var;
-	t_l	*head;
+	int		nb_index;
+	t_stack	*head;
 
 	head = *a;
-	while ((*l).i < (*l).s)
+	while ((*lim).index < (*lim).size)
 	{
-		if ((*a)->in >= (*l).m - (*l).l && (*a)->in <= (*l).m + (*l).l)
+		if ((*a)->index >= (*lim).median - (*lim).first_limit && (*a)->index <= (*lim).median + (*lim).first_limit)
 		{
-			var = (*a)->in;
+			nb_index = (*a)->index;
 			*a = head;
-			presort2(a, b, var, l);
+			presort2(a, b, nb_index, lim);
 			head = *a;
 		}
 		else
 		{
 			*a = (*a)->next;
-			(*l).i++;
-			if ((*l).i == (*l).s)
+			(*lim).index++;
+			if ((*lim).index == (*lim).size)
 			{
 				*a = head;
-				(*l).i = 0;
-				(*l).l += (*l).l2;
+				(*lim).index = 0;
+				(*lim).first_limit += (*lim).second_limit;
 			}
 		}
 	}
 }
 
-void	push_swap(t_l *a, t_l *b, int size)
+void	push_swap(t_stack *a, t_stack *b, int size)
 {
-	t_lim	l;
+	t_limits	lim;
 
-	l.s = size;
-	l.m = size / 2;
-	l.i = 0;
+	lim.size = size;
+	lim.median = size / 2;
+	lim.index = 0;
 	if (size <= 100)
 	{
-		l.l = 10;
-		l.l2 = 10;
+		lim.first_limit = 10;
+		lim.second_limit = 10;
 	}
 	else if (size <= 500)
 	{
-		l.l = 29;
-		l.l2 = 29;
+		lim.first_limit = 29;
+		lim.second_limit = 29;
 	}
 	else
 	{
-		l.l = 50;
-		l.l2 = 50;
+		lim.first_limit = 50;
+		lim.second_limit = 50;
 	}
-	presort(&a, &b, &l);
- 	l.s = size - 1;
-	l.i = 0;
-	final_sort(&a, &b, l);
+	presort(&a, &b, &lim);
+ 	lim.size = size - 1;
+	lim.index = 0;
+	final_sort(&a, &b, lim);
 	del_lists(a);
 }

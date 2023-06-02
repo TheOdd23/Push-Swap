@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printptr.c                                      :+:      :+:    :+:   */
+/*   ft_nb_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anhebert <anhebert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 10:34:46 by anhebert          #+#    #+#             */
-/*   Updated: 2022/05/12 09:38:14 by anhebert         ###   ########.fr       */
+/*   Created: 2022/06/07 10:55:54 by anhebert          #+#    #+#             */
+/*   Updated: 2022/06/07 10:55:54 by anhebert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/push_swap.h"
 
-void	ft_printhexptr(unsigned long nb, int *len, char *base)
+int	nb_args(char const *str, char c)
 {
-	if (nb >= 16)
-		ft_printhexptr((nb / 16), len, base);
-	write(1, &base[nb % 16], 1);
-	*len += 1;
-}
+	int	i;
+	int	count;
 
-int	ft_printptr(void *ptr)
-{
-	int				len;
-	unsigned long	adr;
-
-	adr = (unsigned long)ptr;
-	len = 2;
-	write(1, "0x", 2);
-	ft_printhexptr(adr, &len, "0123456789abcdef");
-	return (len);
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if ((str[i] != c && str[i + 1] == c)
+			|| (str[i] != c && str[i + 1] == '\0'))
+			count++;
+		i++;
+	}
+	return (count);
 }

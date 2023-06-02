@@ -15,7 +15,7 @@
 
 # include "../includes/push_swap.h"
 
-void	read_instructions(t_l *a, t_l *b);
-void	print_stacks(t_l *a, t_l *b);
+void	read_instructions(t_stack *a, t_stack *b);
+void	print_stacks(t_stack *a, t_stack *b);
 
 #endif

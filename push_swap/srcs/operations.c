@@ -12,10 +12,10 @@
 
 #include "../includes/push_swap.h"
 
-void	swap(t_l **stack, char c)
+void	swap(t_stack **stack, char operation)
 {
-	t_l	*head;
-	t_l	*temp;
+	t_stack	*head;
+	t_stack	*temp;
 
 	if (!(*stack) || (*stack)->next == NULL)
 		return ;
@@ -24,16 +24,16 @@ void	swap(t_l **stack, char c)
 	temp = (*stack)->next;
 	(*stack)->next = head;
 	head->next = temp;
-	if (c == 'a')
+	if (operation == 'a')
 		write(1, "sa\n", 3);
-	else if (c == 'b')
+	else if (operation == 'b')
 		write(1, "sb\n", 3);
 }
 
-void	rotate(t_l **stack, char c)
+void	rotate(t_stack **stack, char operation)
 {
-	t_l	*head;
-	t_l	*temp;
+	t_stack	*head;
+	t_stack	*temp;
 
 	if (!(*stack) || (*stack)->next == NULL)
 		return ;
@@ -49,16 +49,16 @@ void	rotate(t_l **stack, char c)
 			head->next = NULL;
 		}
 	}
-	if (c == 'a')
+	if (operation == 'a')
 		write(1, "ra\n", 3);
-	else if (c == 'b')
+	else if (operation == 'b')
 		write(1, "rb\n", 3);
 }
 
-void	reverse_rotate(t_l **stack, char c)
+void	reverse_rotate(t_stack **stack, char operation)
 {	
-	t_l	*pre_last;
-	t_l	*last;
+	t_stack	*pre_last;
+	t_stack	*last;
 
 	last = *stack;
 	pre_last = NULL;
@@ -72,24 +72,24 @@ void	reverse_rotate(t_l **stack, char c)
 	pre_last->next = NULL;
 	last->next = *stack;
 	*stack = last;
-	if (c == 'a')
+	if (operation == 'a')
 		write(1, "rra\n", 4);
-	else if (c == 'b')
+	else if (operation == 'b')
 		write(1, "rrb\n", 4);
 }
 
-void	push(t_l **s1, t_l **s2, char c)
+void	push(t_stack **stack1, t_stack **stack2, char operation)
 {
-	t_l	*temp;
+	t_stack	*temp;
 
-	temp = *s1;
-	if (!(*s1))
+	temp = *stack1;
+	if (!(*stack1))
 		return ;
-	*s1 = (*s1)->next;
-	temp->next = *s2;
-	*s2 = temp;
-	if (c == 'a')
+	*stack1 = (*stack1)->next;
+	temp->next = *stack2;
+	*stack2 = temp;
+	if (operation == 'a')
 		write(1, "pa\n", 3);
-	else if (c == 'b')
+	else if (operation == 'b')
 		write(1, "pb\n", 3);
 }

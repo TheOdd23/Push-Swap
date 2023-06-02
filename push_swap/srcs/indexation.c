@@ -12,66 +12,66 @@
 
 #include "../includes/push_swap.h"
 
-void	current_min(long	*intmin, t_l *stack, t_l **currentintmin)
+void	current_smallest(long *smallest_nb, t_stack *stack, t_stack **current_smallest_nb)
 {
-	*intmin = stack->content;
-	*currentintmin = stack;
+	*smallest_nb = stack->content;
+	*current_smallest_nb = stack;
 }
 
-void	int_min(long *intmin, t_l *stack, t_l **currentintmin,
-		long *previntmin)
+void	find_smallest_nb(long *smallest_nb, t_stack *stack, t_stack **current_smallest_nb,
+		long *prev_smallest_nb)
 {
-	int			i;
-	int			size;
-	t_l			*head;
+	int		i;
+	int		size;
+	t_stack	*head;
 
 	i = 0;
-	size = ft_intlistsize(stack);
+	size = stack_size(stack);
 	head = stack;
 	while (i < size)
 	{
-		if (stack->content < *intmin && stack->content > *previntmin)
-			current_min(&(*intmin), stack, &(*currentintmin));
+		if (stack->content < *smallest_nb && stack->content > *prev_smallest_nb)
+			current_smallest(&(*smallest_nb), stack, &(*current_smallest_nb));
 		else
 		{
 			stack = stack->next;
 			if (stack == NULL)
 			{
-				stack = *currentintmin;
-				stack->in = i;
+				stack = *current_smallest_nb;
+				stack->index = i;
 				i++;
-				*previntmin = stack->content;
+				*prev_smallest_nb = stack->content;
 				stack = head;
-				*intmin = 2147483650;
+				*smallest_nb = 2147483650;
 			}
 		}
 	}
 }
 
-void	int_max(long *intmax, t_l *stack)
+void	find_biggest_nb(long *biggest_nb, t_stack *stack)
 {
 	while (stack != NULL)
 	{
-		if (stack->content > *intmax)
-			*intmax = stack->content;
+		if (stack->content > *biggest_nb)
+			*biggest_nb = stack->content;
 		else
 			stack = stack->next;
 	}
 }
 
-void	indexation(t_l **a)
+void	indexation(t_stack **a)
 {
-	t_l		*head;
-	t_l		*currentintmin;
-	long	intmax;
-	long	intmin;
-	long	previntmin;
+	t_stack	*head;
+	t_stack	*current_smallest_nb;
+	long	biggest_nb;
+	long	smallest_nb;
+	long	prev_smallest_nb;
 
-	previntmin = -2147483750;
-	intmax = -2147483650;
-	intmin = 2147483650;
+	prev_smallest_nb = -2147483750;
+	biggest_nb = -2147483650;
+	smallest_nb = 2147483650;
 	head = (*a);
-	int_max(&intmax, (*a));
+	find_biggest_nb(&biggest_nb, (*a));
 	*a = head;
-	int_min(&intmin, *a, &currentintmin, &previntmin);
+	find_smallest_nb(&smallest_nb, *a, &current_smallest_nb, &prev_smallest_nb);
 }

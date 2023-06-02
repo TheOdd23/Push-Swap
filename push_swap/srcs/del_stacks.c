@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printptr.c                                      :+:      :+:    :+:   */
+/*   del_stacks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anhebert <anhebert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 10:34:46 by anhebert          #+#    #+#             */
-/*   Updated: 2022/05/12 09:38:14 by anhebert         ###   ########.fr       */
+/*   Created: 2022/06/01 08:39:37 by anhebert          #+#    #+#             */
+/*   Updated: 2022/06/07 10:55:01 by anhebert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/push_swap.h"
 
-void	ft_printhexptr(unsigned long nb, int *len, char *base)
+void	del_stacks(t_stack *stack)
 {
-	if (nb >= 16)
-		ft_printhexptr((nb / 16), len, base);
-	write(1, &base[nb % 16], 1);
-	*len += 1;
+	t_stack	*temp;
+
+	temp = stack;
+	while (stack != NULL)
+	{
+		temp = stack;
+		stack = stack->next;
+		free(temp);
+	}
+	free(stack);
 }
 
-int	ft_printptr(void *ptr)
+void	del_tab(char **splitted, int ac)
 {
-	int				len;
-	unsigned long	adr;
+	int	i;
 
-	adr = (unsigned long)ptr;
-	len = 2;
-	write(1, "0x", 2);
-	ft_printhexptr(adr, &len, "0123456789abcdef");
-	return (len);
+	i = 0;
+	while (i < ac)
+	{
+		free(splitted[i]);
+		i++;
+	}
+	free(splitted);
 }

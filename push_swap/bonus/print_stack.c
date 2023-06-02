@@ -12,7 +12,7 @@
 
 #include "push_swap_bonus.h"
 
-void	print_stack_a(t_l *a)
+void	print_stack_a(t_stack *a)
 {
 	while (a != NULL)
 	{
@@ -23,7 +23,7 @@ void	print_stack_a(t_l *a)
 	}
 }
 
-void	print_stack_b(t_l *b)
+void	print_stack_b(t_stack *b)
 {
 	while (b != NULL)
 	{
@@ -42,7 +42,7 @@ void	print_motifs(void)
 	ft_printf("\n");
 }
 
-void	print_stacks(t_l *a, t_l *b)
+void	print_stacks(t_stack *a, t_stack *b)
 {
 	ft_printf("\n");
 	while (a != NULL || b != NULL)
