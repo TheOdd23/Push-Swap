@@ -45,12 +45,12 @@ void	size4_swap(t_stack **a, t_stack **b)
 {
 	while (*a != NULL)
 	{
-		if ((*a)->in == 0)
+		if ((*a)->index == 0)
 		{
 			push(a, b, 'b');
-			if ((*a)->in > (*a)->next->in
-				|| (*a)->next->in > (*a)->next->next->in)
-				simple_swap(a);
+			if ((*a)->index > (*a)->next->index
+				|| (*a)->next->index > (*a)->next->next->index)
+				size3_swap(a);
 			push(b, a, 'a');
 			break ;
 		}
@@ -61,7 +61,7 @@ void	size4_swap(t_stack **a, t_stack **b)
 
 void	size5_endswap(t_stack **a, t_stack **b)
 {
-	if ((*b)->in > (*b)->next->in)
+	if ((*b)->index > (*b)->next->index)
 	{
 		push(b, a, 'a');
 		rotate(a, 'a');
@@ -82,15 +82,15 @@ void	size5_swap(t_stack **a, t_stack **b)
 	i = 0;
 	while (*a != NULL)
 	{
-		if ((*a)->in == 0 || (*a)->in == 4)
+		if ((*a)->index == 0 || (*a)->index == 4)
 		{
 			push(a, b, 'b');
 			i++;
 			if (i == 2)
 			{
-				if ((*a)->in > (*a)->next->in
-					|| (*a)->next->in > (*a)->next->next->in)
-					simple_swap(a);
+				if ((*a)->index > (*a)->next->index
+					|| (*a)->next->index > (*a)->next->next->index)
+					size3_swap(a);
 				break ;
 			}
 		}
@@ -110,5 +110,5 @@ void	simple_swaps(t_stack *a, t_stack *b, int size)
 		size5_swap(&a, &b);
 	else if (size == 2 && a->content > a->next->content)
 		rotate(&a, 'a');
-	del_lists(a);
+	del_stacks(a);
 }

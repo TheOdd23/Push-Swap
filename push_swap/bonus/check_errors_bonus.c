@@ -81,7 +81,7 @@ void	check_digit(int ac, char **av, int *len)
 	{
 		ii = 0;
 		if (av[i][ii] == '-' && ft_isdigit(av[i][1]) == 1)
-			j++;
+			ii++;
 		while (av[i][ii])
 		{
 			if ((av[i][ii] < '0' || av[i][ii] > '9') && av[i][ii])
@@ -124,7 +124,7 @@ void	check_errors(int *ac, char ***av, int *len)
 	i = 0;
 	if (*ac == 2)
 	{
-		*len = ft_nb_args((*av)[1], ' ');
+		*len = nb_args((*av)[1], ' ');
 		splitted = ft_split((*av)[1], ' ');
 		*ac = *len;
 		check_int(*ac, splitted, len);

@@ -18,9 +18,9 @@ void	print_stack_or_error(int res, t_stack *a, t_stack *b, char *instructions)
 	{
 		free (instructions);
 		if (a)
-			del_lists(a);
+			del_stacks(a);
 		if (b)
-			del_lists(b);
+			del_stacks(b);
 		write(2, "Error\n", 6);
 		exit (0);
 	}
@@ -33,7 +33,7 @@ void	check_a(t_stack **a, t_stack *head)
 	if ((*a)->index > (*a)->next->index)
 	{
 		*a = head;
-		del_lists(*a);
+		del_stacks(*a);
 		write(1, "KO\n", 3);
 		exit (0);
 	}
@@ -43,7 +43,7 @@ void	check_a(t_stack **a, t_stack *head)
 		if ((*a)->next == NULL)
 		{
 			*a = head;
-			del_lists(*a);
+			del_stacks(*a);
 			write(1, "OK\n", 3);
 			exit (0);
 		}	
@@ -58,8 +58,8 @@ void	is_in_order(t_stack *a, t_stack *b)
 	if (b != NULL)
 	{
 		if (a)
-			del_lists(a);
-		del_lists(b);
+			del_stacks(a);
+		del_stacks(b);
 		write(1, "KO\n", 3);
 		exit (0);
 	}
@@ -106,7 +106,7 @@ void	read_instructions(t_stack *a, t_stack *b)
 	print_stacks(a, b);
 	while (1)
 	{
-		instructions = get_next_stackine(0);
+		instructions = get_next_line(0);
 		if (instructions == NULL)
 		{
 			free (instructions);

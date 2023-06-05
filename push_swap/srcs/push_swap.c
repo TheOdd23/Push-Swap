@@ -19,15 +19,12 @@ void	final_sort(t_stack **a, t_stack **b, t_limits lim)
 	head = *b;
 	while (lim.index <= lim.size)
 	{
-		if (((*b)->index == lim.size || (*b)->index == lim.size - 1) && lim.index <= lim.size / 2)
-		{
-			if ((*b)->index == lim.size)
-				do_op_1_b(a, b, &head, &lim);
-			else if ((*b)->index == lim.size - 1)
-				do_op_2_b(a, b, &head, &lim);
-		}
-		else if (((*b)->index == lim.size || (*b)->index == lim.size -1) && lim.index > lim.size / 2)
-			do_op_3_b(a, b, &head, &lim);
+		if (((*b)->index == lim.size || (*b)->index == lim.size - 1)
+			&& lim.index <= lim.size / 2)
+			push_nb_firsthalf_to_a(a, b, &head, &lim);
+		else if (((*b)->index == lim.size || (*b)->index == lim.size -1)
+			&& lim.index > lim.size / 2)
+			push_nb_secondhalf_to_a(a, b, &head, &lim);
 		else
 		{
 			*b = (*b)->next;
@@ -36,14 +33,14 @@ void	final_sort(t_stack **a, t_stack **b, t_limits lim)
 	}
 }
 
-void	presort2(t_stack **a, t_stack **b, int nb_index, t_limits *lim)
+void	presort_op_dispatcher(t_stack **a, t_stack **b, int nb_index, t_limits *lim)
 {
 	if ((nb_index < (*lim).median && (*lim).index <= (*lim).size / 2)
 		|| (nb_index >= (*lim).median && (*lim).index <= (*lim).size / 2))
-		do_op_nb_in_first_half_a(a, b, *lim, nb_index);
+		push_nb_firsthalf_to_b(a, b, *lim, nb_index);
 	else if ((nb_index < (*lim).median && (*lim).index > (*lim).size / 2)
 		|| (nb_index >= (*lim).median && (*lim).index > (*lim).size / 2))
-		do_op_nb_in_second_half_a(a, b, *lim, nb_index);
+		push_nb_secondhalf_to_b(a, b, *lim, nb_index);
 	(*lim).size--;
 	(*lim).index = 0;
 }
@@ -56,11 +53,12 @@ void	presort(t_stack **a, t_stack **b, t_limits *lim)
 	head = *a;
 	while ((*lim).index < (*lim).size)
 	{
-		if ((*a)->index >= (*lim).median - (*lim).first_limit && (*a)->index <= (*lim).median + (*lim).first_limit)
+		if ((*a)->index >= (*lim).median - (*lim).first_limit
+			&& (*a)->index <= (*lim).median + (*lim).first_limit)
 		{
 			nb_index = (*a)->index;
 			*a = head;
-			presort2(a, b, nb_index, lim);
+			presort_op_dispatcher(a, b, nb_index, lim);
 			head = *a;
 		}
 		else
@@ -100,8 +98,8 @@ void	push_swap(t_stack *a, t_stack *b, int size)
 		lim.second_limit = 50;
 	}
 	presort(&a, &b, &lim);
- 	lim.size = size - 1;
+	lim.size = size - 1;
 	lim.index = 0;
 	final_sort(&a, &b, lim);
-	del_lists(a);
+	del_stacks(a);
 }

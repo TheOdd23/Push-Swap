@@ -12,43 +12,26 @@
 
 #include "../includes/push_swap.h"
 
-/*Trouve le plus grand chiffre dans la premiere moitie de b et le push dans le a*/
-void	do_op_1_b(t_stack **a, t_stack **b, t_stack **head, t_limits *lim)
+//Find biggest or second to biggest in first half of b and pushes it on top of stack a
+void	push_nb_firsthalf_to_a(t_stack **a, t_stack **b, t_stack **head, t_limits *lim)
 {
 	*b = *head;
-	while ((*b)->index != (*lim).size)
+	while ((*b)->index != (*lim).size && (*b)->index != (*lim).size - 1)
 	{
 		rotate(b, 'b');
 		*head = *b;
-		if ((*b)->index == (*lim).size)
-			break ;
 	}
-/*À revoir, peut-être faire comme doop3 et mettre 1 et 2 ensemble*/
 	if ((*b)->index == (*lim).size)
 	{
 		push(b, a, 'a');
 		*head = *b;
 		if ((*a)->next != NULL
 			&& ((*a)->index > (*a)->next->index))
-			do_op_4_b(a, b, head, lim);
+			set_top_a(a, b, head, lim);
 		(*lim).index = 0;
 		(*lim).size--;
 	}
-}
-
-/*Trouve l'avant-dernier plus grand chiffre dans la premiere moitie de b et le push dans le a*/
-void	do_op_2_b(t_stack **a, t_stack **b, t_stack **head, t_limits *lim)
-{
-	*b = *head;
-	while ((*b)->index != (*lim).size - 1)
-	{
-		rotate(b, 'b');
-		*head = *b;
-		if ((*b)->index == (*lim).size - 1)
-			break ;
-	}
-/*À revoir*/
-	if ((*b)->index == (*lim).size - 1)
+	else if ((*b)->index == (*lim).size - 1)
 	{
 		push(b, a, 'a');
 		(*head) = (*b);
@@ -56,23 +39,21 @@ void	do_op_2_b(t_stack **a, t_stack **b, t_stack **head, t_limits *lim)
 	}
 }
 
-/*Trouve le derneir ou l'avant-dernier plus grand chiffre dans la deuxieme moitié de b et le push dans le a*/
-void	do_op_3_b(t_stack **a, t_stack **b, t_stack **head, t_limits *lim)
+//Find biggest or second to biggest in second half of b and pushes it on top of stack a
+void	push_nb_secondhalf_to_a(t_stack **a, t_stack **b, t_stack **head, t_limits *lim)
 {
 	*b = *head;
-	while ((*b)->index != (*lim).size - 1 || (*b)->index != (*lim).size)
+	while ((*b)->index != (*lim).size - 1 && (*b)->index != (*lim).size)
 	{
 		reverse_rotate(b, 'b');
 		*head = *b;
-		if ((*b)->index == (*lim).size - 1 || (*b)->index == (*lim).size)
-			break ;
 	}
 	if ((*b)->index == (*lim).size)
 	{
 		push(b, a, 'a');
 		*head = *b;
 		if ((*a)->next != NULL && ((*a)->index > (*a)->next->index))
-			do_op_4_b(a, b, head, lim);
+			set_top_a(a, b, head, lim);
 		(*lim).size--;
 	}
 	else if ((*b)->index == (*lim).size - 1)
@@ -83,8 +64,8 @@ void	do_op_3_b(t_stack **a, t_stack **b, t_stack **head, t_limits *lim)
 	(*lim).index = 0;
 }
 
-/*Vérifie s'il s'agit du plus grand nombre sur le dessus, sinon inverse les deux du dessus*/
-void	(t_stack **a, t_stack **b, t_stack **head, t_limits *lim)
+//Looks if top number is bigger than the one after, switch those numbers if it is the case
+void	set_top_a(t_stack **a, t_stack **b, t_stack **head, t_limits *lim)
 {
 	if ((*b) != NULL && (*b)->next != NULL
 		&& ((*b)->index < (*b)->next->index))

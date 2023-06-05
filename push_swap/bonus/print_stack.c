@@ -16,7 +16,7 @@ void	print_stack_a(t_stack *a)
 {
 	while (a != NULL)
 	{
-		ft_printf("%d  |  x\n", a->in);
+		ft_printf("%d  |  x\n", a->content);
 		a = a->next;
 		if (a == NULL)
 			return ;
@@ -27,7 +27,7 @@ void	print_stack_b(t_stack *b)
 {
 	while (b != NULL)
 	{
-		ft_printf("x  |  %d\n", b->in);
+		ft_printf("x  |  %d\n", b->content);
 		b = b->next;
 		if (b == NULL)
 			return ;
@@ -59,7 +59,7 @@ void	print_stacks(t_stack *a, t_stack *b)
 		}
 		else
 		{
-			ft_printf("%d  |  %d\n", a->in, b->in);
+			ft_printf("%d  |  %d\n", a->content, b->content);
 			a = a->next;
 			b = b->next;
 		}
