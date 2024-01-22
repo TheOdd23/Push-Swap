@@ -1,4 +1,4 @@
-# push_swap
+# Push Swap
 
 The goal of this project was to make a sorting algorithm that takes as less actions as possible to sort every number received in arguments.
 
